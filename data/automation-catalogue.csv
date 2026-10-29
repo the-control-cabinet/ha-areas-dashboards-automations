@@ -1,0 +1,59 @@
+id,domain,automation,trigger,conditions,actions,priority,safety_notes,status
+LS-01,Life safety,Fire / CO / fault alert,Aico interface fire/CO/fault on or cleared,none,Critical push to all phones; persistent notification; resolved message,P1,Local only; no mode conditions,Live
+LS-02,Life safety,Fire/CO interface offline,Either Shelly unavailable 5 min,none,P2 alert; back-online message,P2,,Live
+LS-03,Life safety,Fire mode response,Fire on,none,All lights 100 %; blinds open; aircon/purifiers/fans off (don't spread smoke); speaker announcement; pixel display,P1,Never unlocks doors automatically: an actionable 'unlock front door' button is sent instead,Proposed
+LS-04,Life safety,CO response,CO on,none,Announcement 'CO alarm: open windows, leave, call the gas emergency number'; aircon/purifiers off,P1,No attempt to control the boiler or gas,Proposed
+LS-05,Life safety,Quarterly life-safety test reminder,1st day of each quarter,none,Reminder with the test checklist (sound-all via the interface),P3,,Proposed
+SE-01,Security,Arm prompt on Away,Home mode → Away,alarm disarmed,Actionable push 'Arm the alarm?',P3,Auto-arm only after a month of reliable presence,Proposed
+SE-02,Security,Night lock and garage check,Home mode → Night,door unlocked or garage open,Push with actions (lock / close),P2,Garage close only with a confirmation,Proposed
+SE-03,Security,Garage left open,Garage open 15 min,nobody in garage area,P3 push; P2 after dark,P2,,Proposed
+SE-04,Security,Doorbell press,Doorbell event,none,Snapshot to phones; pause media in occupied rooms; announce,P3,,Proposed
+SE-05,Security,Access control → alarm interlock,(details withheld),,,,,Live
+SE-06,Security,Wireless-button entrance control,(details withheld),,,,,Live
+HC-01,Heating and cooling,Heating/cooling interlock,Aircon cooling while that room's zone has heat demand (or vice versa),none,Inhibit the later request; notify once,P3,FDD F11; dead band ≥ 2 °C,Proposed
+HC-02,Heating and cooling,Away setback,Home mode → Away (confirmed 30 min),none,Evohome economy/away mode; restore on return,P4,Frost protection always kept,Proposed
+HC-03,Heating and cooling,Holiday mode,Home mode → Holiday,none,Holiday mode on both controllers; DHW off except LG-01,P4,,Proposed
+HC-04,Heating and cooling,Stuck zone / 5 °C override alert,Any zone setpoint ≤ 5.5 °C or the sun-thermometer override,mode not Holiday,P2 alert with zone name,P2,From the 5 °C fault case study,Planned
+HC-05,Heating and cooling,Hot water disabled by the timer,DHW calling AND timer output off,none,P2 alert: return the TS715Si to permanent ON,P2,FDD F16,Proposed
+HC-06,Heating and cooling,Cylinder stat or cut-out not passing,Cylinder relay on AND stat-passing off for 10 min,hot water enabled,P2 alert,P2,FDD F15; reset the cut-out only after finding why,Proposed
+HC-07,Heating and cooling,Aircon sleep forces cool,Sleep selected,none,Force Cool mode,P4,Data-point constraint,Live
+HC-08,Heating and cooling,Room IAQ response,CO2 or PM2.5 above band in an occupied room,purifier present,Purifier to auto/high; notify if persistent,P3,,Proposed
+HC-09,Heating and cooling,Humidity control,Room RH < 35 % (heating season),occupied,Humidifier on; off at 45 %,P4,,Proposed
+HC-10,Heating and cooling,Window open (when contact sensors are fitted),Window open 2 min,zone heating,Zone setback until closed,P4,Evohome window detection already on,Planned
+LG-01,Heating and cooling,Weekly 60 °C DHW cycle,Weekly (or Holiday mode),none,Raise DHW setpoint to 60 °C; confirm the hot-outlet NTC reached 60 °C; alert if not,P3,Legionella control; after the cylinder NTCs are fitted,Planned
+EN-01,Energy,Cheap-window reminder,Tariff cheap window starts,dishwasher/washer loaded flag,Notify 'cheap window now',P4,,Proposed
+EN-02,Energy,Flexible loads in cheap windows,Cheap window AND low carbon intensity,energy-flex device ready,Start the load (smart plug / appliance API),P4,Never for tumble dryer unattended at night,Proposed
+EN-03,Energy,EV plugged-in check,Evening AND car not plugged in,car home; battery < 50 %,Reminder to plug in,P3,,Proposed
+EN-04,Energy,Peak demand warning,Import above threshold for 5 min,none,Notify biggest loads,P3,,Proposed
+EN-05,Energy,Carbon-aware heating trim,High carbon intensity,mode Home,Shadow only: log what a 0.5 °C setback would save,P4,Comfort always wins,Proposed
+WA-01,Water,Steady low flow (drift or leak),Low steady flow 10 min,none,Push alert,P2,,Live
+WA-02,Water,Shower sub-metering,Shower start + humidity confirmation,none,Usage per shower,P4,,Live
+WA-03,Water,Washing machine sub-metering,Cycle start,none,Usage per cycle,P4,,Live
+WA-04,Water,Leak sensor wet,Any leak sensor wet,none,P1 push + announcement; pixel display; stopcock reminder,P1,Auto shut-off only once a mains shut-off valve is fitted,Proposed
+WA-05,Water,Tundish discharge,Tundish plate wet,none,P2 alert; correlate with cylinder pressure,P2,Unvented cylinder safety discharge,Planned
+WA-06,Water,Unexpected flow while Away,Flow > 0 with Home mode Away,none,P2 alert,P2,,Proposed
+WA-07,Water,Frost risk on outside pipes,Outdoor < 0 °C forecast,none,Reminder to protect outside taps,P3,,Proposed
+LI-01,Lighting and shading,Occupancy lighting,Area becomes occupied,lux below threshold; not sleep,Lights to the area's scene; off after vacancy delay,P4,Manual change suspends it until next mode change,Proposed
+LI-02,Lighting and shading,Night path,Motion in hall/landing,Night mode,Night-path lights at 5 %,P4,,Proposed
+LI-03,Lighting and shading,Sunset and sunrise,Sun elevation,mode Home,Outside lights on/off; blinds by schedule,P4,,Proposed
+LI-04,Lighting and shading,Solar-gain shading,Sun on facade AND room > setpoint + 1 °C,cooling season; room unoccupied or allowed,Blinds to shade position,P4,Coordinated with HC-01,Proposed
+LI-05,Lighting and shading,Presence simulation,Holiday mode,after dusk,Randomised lights in lived-in rooms,P4,,Proposed
+LI-06,Lighting and shading,Media scene,TV playing in lounge after dusk,none,Lights dim; blinds close,P4,,Proposed
+LI-07,Lighting and shading,VPin table-aware lighting,Table launched (MQTT),none,Room lights to the table's colours,P4,,Planned
+AP-01,Appliances,Washer / dryer done,Vibration stops 5 min,cycle was running,Notify the responsible person,P3,,Proposed
+AP-02,Appliances,3D print finished or failed,Printer state change,none,Notify with a snapshot,P3,,Proposed
+AP-03,Appliances,Mower rain hold,Rain forecast or detected,none,Mower to dock,P4,,Proposed
+AP-04,Appliances,Dishwasher sub-metering,Plug power profile,none,Energy and water per cycle,P4,,Planned
+IN-01,Information,Bin night reminder,Evening before collection,none,Notify which bins,P4,,Proposed
+IN-02,Information,Rain warnings,Several weather sources,none,Consolidated rain warning,P4,,Live
+IN-03,Information,Washing-line AI check,Rain coming AND washing out (AI camera check),none,Push 'bring the washing in',P3,,Live
+IN-04,Information,Commute travel times,Weekday morning,workday,Travel-time notifications,P4,,Live
+IN-05,Information,Aurora alert,AuroraWatch amber/red,after dark; clear sky,Notify,P4,,Proposed
+IN-06,Information,Met Office warning and flood gauges,Warning issued or gauge above threshold,none,Notify with severity,P3,,Proposed
+IN-07,Information,Train disruption,Delay on the usual departure,workday,Notify,P3,,Proposed
+SH-01,System health,Device offline,critical-device unavailable 10 min,none,P3 alert (P2 for gateways and the coordinator),P2,,Proposed
+SH-02,System health,Battery low,Any battery-labelled device < 20 %,none,Weekly list; P3 for locks and leak sensors,P3,,Proposed
+SH-03,System health,ESPHome reset watch,Uptime drops or reset reason = watchdog,none,Log and count per board; weekly summary,P4,Feeds the ESPHome watchdog investigation,Proposed
+SH-04,System health,Backup verification,Nightly backup missing or older than 26 h,none,P3 alert,P3,,Proposed
+SH-05,System health,HA host resources,Disk > 80 % or CPU high 30 min,none,P3 alert,P3,,Proposed
+SH-06,System health,Paused automations reminder,Any automation_pause toggle on 24 h,none,P3 reminder,P3,Exceptions stay visible,Proposed

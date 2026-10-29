@@ -1,0 +1,13 @@
+dashboard,view,cards,status
+Main,Home (landing),"status strip (mode, alarm, fire/CO, leaks, heating, energy); exceptions list; weather and warnings; next bin",Proposed
+Main,Ground / First / Second / Outside,"area cards per room; picture-elements floor plan (phase 5)",Proposed
+Main,Heating and cooling,"18 zone tiles (setpoint, actual, demand, override); DHW; boiler state; aircon; IAQ",Partly live (Heating)
+Main,Energy,"import/export, tariff windows, carbon intensity, EV, loads, daily cost",Planned (#5)
+Main,Water,"existing gauges, draws, pressure, bills; leak sensors",Live (Water)
+Main,Security and life safety,"fire/CO status; alarm; lock; garage; cameras; door events",Proposed
+Main,Plant room,"schematic from plant-room-graphics-hmi",Planned
+Main,System health,"integration availability; gateways; ESPHome uptime/resets; Zigbee link quality; host; backups",Proposed
+Main,Information,"rail, travel times, bins, news, sports, aurora, flights",Live (Travel & info / Aurora)
+Main,Media,"music, TVs, speakers",Live
+Guest,Guest,"guest-room lights, blinds, heating; Wi-Fi card",Proposed
+Wall panel,Landing only,"large tiles; night dimming; PIN for security",Optional
